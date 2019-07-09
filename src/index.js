@@ -1,9 +1,7 @@
-function helloWorld() {
-    let element = document.createElement('div');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-    element.innerHTML = 'Hello world';
+// import './index.css';
+import App from './App';
 
-    return element;
-}
-
-document.body.appendChild(helloWorld());
+ReactDOM.render(<App />, document.getElementById('app'));
