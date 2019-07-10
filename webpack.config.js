@@ -1,10 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const htmlPlugin = new HtmlWebpackPlugin({
-    template: './index.html',
-    filename: './index.html'
-  });
+  template: './index.html',
+  filename: './index.html'
+});
+
+const copyPlugin = new CopyPlugin([
+  {
+    from: './assets/',
+    to: 'assets/'
+  }
+]);
 
 module.exports = {
     entry: './src/index.js',
@@ -25,8 +33,7 @@ module.exports = {
               loader: 'babel-loader',
               options: {
                 babelrc: false,
-                presets: ['@babel/env', '@babel/react'],
-                // plugins: ['transform-class-properties']
+                presets: ['@babel/env', '@babel/react']
               }
             }
           },
@@ -47,5 +54,5 @@ module.exports = {
           },
         ]
     },
-    plugins: [htmlPlugin]
+    plugins: [htmlPlugin, copyPlugin]
 };

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import ArticlePreview from './components/ArticlePreview'
+
 const API_URL = 'http://localhost:6010';
 
 class App extends Component {
@@ -62,13 +64,11 @@ class App extends Component {
     } else {
       console.log(articles);
       return (
-        <ul>
+        <div>
           {articles.map(item => (
-            <li key={item.id}>
-              {item.title} {item.preamble}
-            </li>
+            <ArticlePreview key={item.id} item={item}/>
           ))}
-        </ul>
+        </div>
       );
     }
   }

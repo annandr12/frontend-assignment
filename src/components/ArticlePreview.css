@@ -1,0 +1,33 @@
+.article {
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.image {
+  max-width: 280px;
+  margin: 10px 0;
+}
+
+.info {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  padding-left: 30px;
+}
+
+.title {
+  margin: 10px 0;
+  font-size: 25px;
+}
+
+.date {
+  float: right;
+  margin: 10px;
+  margin-left: 20px;
+  color: #a6a6a6;
+}
+
+.preamble {
+  width: 100%;
+  margin-top: 30px;
+}
