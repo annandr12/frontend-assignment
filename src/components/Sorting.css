@@ -4,6 +4,9 @@
   justify-content: flex-end;
   align-items: center;
 }
+.sorting span {
+  cursor: pointer;
+}
 .sorting_triangles {
   display: flex;
   flex-direction: column;
@@ -18,4 +21,13 @@
 
 .sorting_triangle.active {
   color: black;
+}
+
+@media all and (max-width: 800px) {
+  .sorting {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px
+  }
 }

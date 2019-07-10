@@ -1,5 +1,6 @@
 .filters {
   flex-basis: 20%;
+  margin-top: 44px;
 }
 
 .filters_title {
@@ -10,8 +11,16 @@
   display: block;
   margin-top: 10px;
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 .filter_label input {
   margin-right: 10px;
+}
+
+@media all and (max-width: 800px) {
+  .filters {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
 }
