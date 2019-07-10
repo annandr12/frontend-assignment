@@ -1,0 +1,17 @@
+.filters {
+  flex-basis: 20%;
+}
+
+.filters_title {
+  text-decoration: underline;
+}
+
+.filter_label {
+  display: block;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.filter_label input {
+  margin-right: 10px;
+}

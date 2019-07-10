@@ -33,7 +33,8 @@ module.exports = {
               loader: 'babel-loader',
               options: {
                 babelrc: false,
-                presets: ['@babel/env', '@babel/react']
+                presets: ['@babel/env', '@babel/react'],
+                plugins: ['transform-class-properties']
               }
             }
           },

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import ArticlePreview from './components/ArticlePreview'
+import ArticlePreview from './components/ArticlePreview';
+import Filters from './components/Filters'
 
 const API_URL = 'http://localhost:6010';
 
@@ -29,13 +30,20 @@ class App extends Component {
       selectedFilters.map((filter) => this.getArticlesRequest(filter)) :
       filters.map((filter) => this.getArticlesRequest(filter));
 
+    // this.setState((state) => {return { isLoaded: !state.isLoaded }})
     axios.all(requests)
-      .then(axios.spread((fashion, sports) => {
-        this.setState({
-          isLoaded: true,
-          articles: [...fashion.data.articles, ...sports.data.articles]
+      .then((responses) => {
+        var tmp = [];
+        responses.forEach((response) => {
+          tmp = [...tmp, ...response.data.articles];
         })
-      }))
+        this.setState(() => {
+          return {
+            isLoaded: true,
+            articles: tmp
+          }
+        })
+      })
       .catch((err)=> {
         if(err.response.status < 500) {
           this.setState({
@@ -51,23 +59,48 @@ class App extends Component {
       });
   }
 
+  changeFilters = (event) => {
+    const {selectedFilters} = this.state;
+    const target = event.target;
+    const filter = target.name;
+    const index = selectedFilters.indexOf(filter);
+    if(index > -1) {
+      this.setState({
+        selectedFilters: selectedFilters.filter((item) => item != filter)
+      }, () => {
+        this.getArticles();
+      })
+    } else {
+      selectedFilters.push(filter)
+
+      this.setState({
+        selectedFilters: selectedFilters
+      }, () => {
+        this.getArticles();
+      })
+    }
+  }
+
   componentDidMount() {
     this.getArticles();
   }
 
   render() {
-    const { error, isLoaded, articles } = this.state;
+    const { error, isLoaded, articles, filters, selectedFilters } = this.state;
+    console.log(isLoaded)
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <div className="container">Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div className="container">Loading...</div>;
     } else {
-      console.log(articles);
       return (
-        <div>
-          {articles.map(item => (
-            <ArticlePreview key={item.id} item={item}/>
-          ))}
+        <div className="container">
+          <Filters filters={filters} selectedFilters={selectedFilters} handleChange={this.changeFilters}/>
+          <div className="articles">
+            {articles.map(item => (
+              <ArticlePreview key={item.id} item={item}/>
+            ))}
+          </div>
         </div>
       );
     }
